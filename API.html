@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      let heading=document.createElement("h2")
+      heading.style.textAlign="center"
+      heading.style.color="red";
+      heading.innerHTML="List Of Products Using API"
+      let main_div=document.createElement("div")
+          main_div.style.display="flex";
+          main_div.style.flexWrap="wrap"
+          main_div.style.gap="20px"
+          main_div.style.marginTop="40px"
+          main_div.style.alignItems="center";
+          main_div.style.justifyContent="center";
+
+          
+      let data=fetch("https://679ba48e33d3168463249d82.mockapi.io/products");
+      data.then((x)=>x.json()).then((x)=>{
+        let res=x;
+        res.map((x)=>{
+          let catag=document.createElement("h2")
+          catag.style.marginTop="-1px"
+          catag.innerHTML=x.category;
+          catag.style.textAlign='center';
+          catag.style.color="rgb(184, 64, 64)"
+          let name=document.createElement("h4");
+          name.style.marginTop="-15px"
+          name.style.color="royalblue"
+          name.innerHTML=x.name;
+          name.style.textAlign='center';
+          let price=document.createElement("h3");
+          price.innerHTML=`Price : ${x.price} $`
+          price.style.textAlign="center"
+
+
+          let picture=document.createElement("img")
+          picture.src=x.image;
+          picture.style.height="100px";
+          picture.style.width="100px";
+          picture.style.borderRadius="15px"
+
+          let container=document.createElement("div")
+          container.style.border="1px solid"
+          container.style.width="300px";
+          container.style.borderRadius="15px";
+          container.style.backgroundColor="rgb(211, 222, 237)";
+          container.style.boxShadow="0 0 10px"
+
+          
+
+          let innerdiv=document.createElement("div")
+          innerdiv.style.margin="auto"
+          innerdiv.style.width="100px";
+          
+          innerdiv.appendChild(picture);
+          
+          main_div.append(container);
+          
+
+
+          container.append(catag,name,innerdiv,price);
+          document.body.append(heading,main_div);
+
+        })
+      })
+    </script>
+  </body>
+</html>
